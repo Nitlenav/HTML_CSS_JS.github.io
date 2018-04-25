@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+    <head>
+        <title>Search music html page</title>
+        <link rel="stylesheet" href=".\CSS\style.css">
+        <script src=".\js\jquery-3.3.1.min.js"></script>
+        <script>
+			function searchEnter (e, query){
+			if(e.keyCode == 13)
+			searchMusic(query)
+			}
+		
+            function searchMusic(searchQuery) {
+                $.get({ 
+                    url: "https://itunes.apple.com/search?term=" + searchQuery.replace(' ', '+') + "&limit=25", 
+                    success: function(response) {
+                        var songsList = JSON.parse(response).results;
+                        var resultsElement = $("#result");
+
+                        resultsElement.html("");
+                        var resHtml = "";
+                        for (var i = 0; i < songsList.length; i++) {
+                            var song = songsList[i];
+							var artistEl = $('<td class="search-result__item-artist">' + song.artistName + ' </td>'+
+							'<td class="search-result__item-track"> ' + song.trackName +'</td>' +
+							'<td><button>+</button></td>');
+                            var songEl = $('<tr class="search-result__item"></tr>');
+                            songEl.append(artistEl);
+                            songEl.click(function(event) {
+							var resMuz = $("#result_serch_music");
+                                var songName = event.currentTarget.children[0].innerHTML;
+                                //window.alert("Play " + songName);
+							var artistE2 = $('<div class="search-result__item-artist">' + songName + '</div>');
+                            var songE2 = $('<span class="search-result__item"></span>');
+                            songE2.append(artistE2);
+							songE2.appendTo(resMuz);
+                            });
+                            songEl.appendTo(resultsElement);
+                        }
+                    } 
+                });
+            }
+        </script>
+    </head>
+    <body style="color: #00FF00;">
+		<div class = "stail-table">
+		<span>Search favourite Music</span>
+		<input type="text" id="search-input" onkeypress="searchEnter(event, value)" placeholder="Search Music"></input>
+		<button onclick="searchMusic($('#search-input').val());">Search</button>
+		<div  id="result"></div>
+		</div>
+		
+		<div class = "music">
+		<span> My favourite Music</span>
+		<div  id="result_serch_music"></div>
+		</div>
+    </body>
+</html>

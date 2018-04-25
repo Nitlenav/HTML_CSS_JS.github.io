@@ -1,0 +1,37 @@
+body {
+        background-color: #E7EDE7;
+      }
+	  .search-result__item:table{
+				border-spacing: 0 10px;
+				font-family: 'Open Sans', sans-serif;
+				font-weight: bold;
+	  }
+.search-result__item-artist {
+                color: blue;
+                align: right;
+				word-break: break-all;
+				border: 0px solid gray;
+
+							}
+.search-result__item-track {
+                color: green;
+				word-break: break-all;
+
+            }
+.add-result__item-artist {
+                align: left;
+            }
+.stail-table {
+				cellspacing: 0;
+				cellpadding: 50;	
+			}	
+.stail-cell {
+				cellspacing: 0;
+			}
+.stail-table, .music{
+		font-family: Arial, serif;
+		display: inline-grid;
+		color: black;
+		width: 40%;
+		border-radius: 5px;
+	}		
